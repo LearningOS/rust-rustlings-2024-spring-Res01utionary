@@ -6,7 +6,6 @@
 // Execute `rustlings hint primitive_types1` or use the `hint` watch subcommand
 // for a hint.
 
-// I AM NOT DONE
 
 fn main() {
     // Booleans (`bool`)
@@ -15,8 +14,8 @@ fn main() {
     if is_morning {
         println!("Good morning!");
     }
-
-    let // Finish the rest of this line like the example! Or make it be false!
+    //基本类型布尔类型的使用
+    let is_evening = true;// Finish the rest of this line like the example! Or make it be false!
     if is_evening {
         println!("Good evening!");
     }

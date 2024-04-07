@@ -3,7 +3,6 @@
 // Execute `rustlings hint functions5` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 fn main() {
     let answer = square(3);
@@ -11,5 +10,6 @@ fn main() {
 }
 
 fn square(num: i32) -> i32 {
-    num * num;
+    //表达式和语句的性质：表达式总会返回一个值 而语句不会
+    num * num
 }
