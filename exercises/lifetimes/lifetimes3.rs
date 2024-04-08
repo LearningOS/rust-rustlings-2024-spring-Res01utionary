@@ -4,12 +4,10 @@
 //
 // Execute `rustlings hint lifetimes3` or use the `hint` watch subcommand for a
 // hint.
-
-// I AM NOT DONE
-
-struct Book {
-    author: &str,
-    title: &str,
+//表示Book对象不能存在的比'a更久
+struct Book<'a> {
+    author: &'a str,
+    title: &'a str,
 }
 
 fn main() {

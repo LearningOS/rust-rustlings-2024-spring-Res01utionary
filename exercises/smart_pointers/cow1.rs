@@ -12,8 +12,9 @@
 //
 // Execute `rustlings hint cow1` or use the `hint` watch subcommand for a hint.
 
-// I AM NOT DONE
-
+// Cow（Clone On Write）是一个智能指针，提供了写时复制（clone-on-write）的功能：它可以封装并提供对借用数据的不可变访问，在需要进行变异或拥有数据时，可以惰性地进行数据的克隆。该类型旨在通过 Borrow trait 与通用的借用数据一起使用。
+// Cow 实现了 Deref，这意味着你可以直接在它封装的数据上调用非变异方法。如果需要进行变异，则可以通过 to_mut 方法获取到拥有值的可变引用，必要时进行克隆。
+// 如果需要引用计数指针，注意到 Rc::make_mut 和 Arc::make_mut 也可以提供写时复制的功能。
 use std::borrow::Cow;
 
 fn abs_all<'a, 'b>(input: &'a mut Cow<'b, [i32]>) -> &'a mut Cow<'b, [i32]> {
@@ -49,6 +50,8 @@ mod tests {
         let mut input = Cow::from(&slice[..]);
         match abs_all(&mut input) {
             // TODO
+            Cow::Owned(_) => Err("no need clone"),
+            _ => Ok(()),
         }
     }
 
@@ -61,6 +64,8 @@ mod tests {
         let mut input = Cow::from(slice);
         match abs_all(&mut input) {
             // TODO
+            Cow::Owned(_) => Ok(()),
+            _ => Err("Expected owned value"),
         }
     }
 
@@ -73,6 +78,8 @@ mod tests {
         let mut input = Cow::from(slice);
         match abs_all(&mut input) {
             // TODO
+            Cow::Owned(_) => Ok(()),
+            _ => Err("Expected owned value"),
         }
     }
 }

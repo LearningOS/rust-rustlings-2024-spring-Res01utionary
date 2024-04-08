@@ -11,8 +11,6 @@
 // Execute `rustlings hint iterators5` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
 use std::collections::HashMap;
 
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -35,7 +33,8 @@ fn count_for(map: &HashMap<String, Progress>, value: Progress) -> usize {
 fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
     // map is a hashmap with String keys and Progress values.
     // map = { "variables1": Complete, "from_str": None, ... }
-    todo!();
+    // todo!();
+    map.values().filter(|&item| *item == value).count()
 }
 
 fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
@@ -54,7 +53,16 @@ fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Pr
     // collection is a slice of hashmaps.
     // collection = [{ "variables1": Complete, "from_str": None, ... },
     //     { "variables2": Complete, ... }, ... ]
-    todo!();
+    // todo!();
+    // 创建一个类似于 map 的迭代器，但会展平嵌套的结构。
+    // map 适配器非常有用，但仅当闭包参数生成单个值时才能发挥作用。如果闭包生成的是一个迭代器，那么就会出现额外的间接层。flat_map() 将自动消除这种额外的层级。
+    // 可以将 flat_map(f) 理解为语义上的等价物，即先进行映射操作，然后展平，类似于 map(f).flatten()。
+    // 另一种理解 flat_map() 的方式是：map 的闭包为每个元素返回一个值，而 flat_map() 的闭包为每个元素返回一个迭代器。
+    collection
+        .iter()
+        .flat_map(|map| map.values())
+        .filter(|&item| *item == value)
+        .count()
 }
 
 #[cfg(test)]

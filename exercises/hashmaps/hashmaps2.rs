@@ -14,8 +14,6 @@
 // Execute `rustlings hint hashmaps2` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
 use std::collections::HashMap;
 
 #[derive(Hash, PartialEq, Eq)]
@@ -40,6 +38,12 @@ fn fruit_basket(basket: &mut HashMap<Fruit, u32>) {
         // TODO: Insert new fruits if they are not already present in the
         // basket. Note that you are not allowed to put any type of fruit that's
         // already present!
+        //参考https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.entry
+        //entry: 获取给定键在映射中的对应条目，以便进行就地操作。
+        //返回一个Enum std::collections::hash_map::Entry的枚举值
+        //or_insert : Enum std::collections::hash_map::Entry的方法
+        //如果条目为空，则插入默认值，以确保条目中包含值，并返回条目中值的可变引用。
+        basket.entry(fruit).or_insert(1);
     }
 }
 
